@@ -1,28 +1,35 @@
 #include<iostream>
 using namespace std;
 
-bool search(int arr[], int size, int key){
-    for(int i=0;i<size;i++){
-        if(arr[i]==key){
-            return 1;
-        }
+void reverse(int arr[],int size){
+    int start = 0;
+    int end = size - 1;
+
+    while(start <= end){
+        swap(arr[start], arr[end]);
+        start++;
+        end--;
     }
-    return 0;
 }
 
+void printArray(int arr[],int size){
+    for(int i=0;i<size;i++){
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+}
 
 int main(){
-   int num[50] = {1,3,5,7,9,-2,-4,-6,-8,0};
-   int key;
-   cout<<"Enter the key ";
-   cin>>key;
+    int size;
+    cin>>size;
 
-   bool found = search(num,50,key);
-   if(found){
-    cout<<"Key is found";
-   }
-   else
-    cout<<"Key not found";
+    int num[100];
+    for(int i=0;i<size;i++){
+        cin>>num[i];
+    }
+    reverse(num,size);
+    printArray(num,size);
 
-   return 0;
+
+    return 0;
 }
