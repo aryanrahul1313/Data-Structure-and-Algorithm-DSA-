@@ -8,6 +8,8 @@ struct Node
 };
 */
 // your task is to complete this function
+
+// Approach 1
 Node* solve(Node* root, int &k, int node){
     // base case
     if(root == NULL){
@@ -55,4 +57,44 @@ int kthAncestor(Node *root, int k, int node)
     else{
         return ans->data;
     }
+}
+
+
+
+
+
+
+
+
+
+// Approach 2
+bool solve(Node* root, int &k, int &node, int &val){
+    // base case
+    if(root == NULL){
+        return 0;
+    }
+    
+    if(root->data == node){
+       return 1; 
+    }
+    
+    int leftAns = solve(root->left, k, node, val);
+    int rightAns = solve(root->right, k, node, val);
+    
+    // wapas aa rhe h
+    if(leftAns || rightAns){
+        k--;
+        if(k == 0){
+            val = root->data;
+        }
+        return 1;
+    }
+    return 0;
+}
+
+int kthAncestor(Node *root, int k, int node)
+{
+    int val = -1;
+    solve(root, k, node, val);
+    return val;
 }
